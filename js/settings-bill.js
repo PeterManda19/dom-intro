@@ -1,22 +1,83 @@
-// get a reference to the sms or call radio buttons
+// Get a reference to the sms or call radio buttons
+const callRadioBtn = document.querySelector(".billItemTypeWithSettings[value='call']");
+const smsRadioBtn = document.querySelector(".billItemTypeWithSettings[value='sms']");
 
-// get refences to all the settings fields
+// Get references to all the settings fields
+const callCostInput = document.querySelector(".callCostSetting");
+const smsCostInput = document.querySelector(".smsCostSetting");
+const warningLevelInput = document.querySelector(".warningLevelSetting");
+const criticalLevelInput = document.querySelector(".criticalLevelSetting");
 
-//get a reference to the add button
+// Get a reference to the add button
+const addButton = document.querySelector(".button-primary");
 
-//get a reference to the 'Update settings' button
+// Get a reference to the 'Update settings' button
+const updateSettingsBtn = document.querySelector(".updateSettings");
 
-// create a variables that will keep track of all the settings
+// Create variables that will keep track of all the settings
+let callCost = 0;
+let smsCost = 0;
+let warningLevel = 0;
+let criticalLevel = 0;
 
-// create a variables that will keep track of all three totals.
+// Create variables that will keep track of all three totals
+let callTotal = 0;
+let smsTotal = 0;
+let overallTotal = 0;
 
-//add an event listener for when the 'Update settings' button is pressed
+// Add an event listener for when the 'Update settings' button is pressed
+updateSettingsBtn.addEventListener("click", function () {
+  // Update the values of the settings variables
+  callCost = parseFloat(callCostInput.value);
+  smsCost = parseFloat(smsCostInput.value);
+  warningLevel = parseFloat(warningLevelInput.value);
+  criticalLevel = parseFloat(criticalLevelInput.value);
 
-//add an event listener for when the add button is pressed
+  // Reset the totals to zero
+  callTotal = 0;
+  smsTotal = 0;
+  overallTotal = 0;
 
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the call / sms total
-// * add the appropriate value to the overall total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen.
-// * check the value thresholds and display the total value in the right color.
+  // Reset the displayed values on the screen
+  document.querySelector(".callTotalSettings").textContent = callTotal.toFixed(2);
+  document.querySelector(".smsTotalSettings").textContent = smsTotal.toFixed(2);
+  document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
+
+  // Reset the color of the total value displayed on the screen
+  document.querySelector(".totalSettings").classList.remove("warning");
+  document.querySelector(".totalSettings").classList.remove("danger");
+});
+
+// Add an event listener for when the add button is pressed
+addButton.addEventListener("click", function () {
+  // Get the value from the billItemTypeRadio radio buttons
+  const billItemType = document.querySelector(".billItemTypeWithSettings:checked");
+  if (billItemType) {
+    // Add the appropriate value to the call / sms total
+    if (billItemType.value === "call") {
+      callTotal += callCost;
+    } else if (billItemType.value === "sms") {
+      smsTotal += smsCost;
+    }
+
+    // Add the appropriate value to the overall total
+    overallTotal = callTotal + smsTotal;
+
+    // Display the latest total on the screen
+    document.querySelector(".callTotalSettings").textContent = callTotal.toFixed(2);
+    document.querySelector(".smsTotalSettings").textContent = smsTotal.toFixed(2);
+    document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
+
+    // Check the value thresholds and display the total value in the right color
+    if (overallTotal >= criticalLevel) {
+      document.querySelector(".totalSettings").classList.add("danger");
+      addButton.disabled = true; // Prevent any new costs from being added
+    } else if (overallTotal >= warningLevel) {
+      document.querySelector(".totalSettings").classList.add("warning");
+    } else {
+      document.querySelector(".totalSettings").classList.remove("warning");
+      document.querySelector(".totalSettings").classList.remove("danger");
+      addButton.disabled = false; // Re-enable the add button
+    }
+  }
+});

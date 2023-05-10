@@ -27,24 +27,24 @@ radioBillAddBtn.addEventListener("click", function() {
 
   // * add nothing for invalid values that is not 'call' or 'sms'.
 
-  // * display the latest total on the screen
+  // display the latest total on the screen
   const callTotal = document.querySelector(".callTotalTwo");
   const smsTotal = document.querySelector(".smsTotalTwo");
   const total = document.querySelector(".totalTwo");
 
-  callTotal.innerHTML = (totalBill - smsTotal.innerHTML).toFixed(2);
-  smsTotal.innerHTML = (totalBill - callTotal.innerHTML).toFixed(2);
+  callTotal.innerHTML = (totalBill - smsTotal).toFixed(2);
+  smsTotal.innerHTML = (totalBill - callTotal).toFixed(2);
   total.innerHTML = totalBill.toFixed(2);
 
-  // set the appropriate color for the total amount
   if (totalBill > 30 && totalBill <= 50) {
-    total.classList.remove("red");
-    total.classList.add("orange");
+    total.style.remove("red");
+    total.style.add("orange");
   } else if (totalBill > 50) {
-    total.classList.remove("orange");
-    total.classList.add("red");
+    total.style.remove("orange");
+    total.style.add("red");
   } else {
-    total.classList.remove("orange");
-    total.classList.remove("red");
+    total.style.remove("orange");
+    total.style.remove("red");
+    total.style.add("black");
   }
 });
