@@ -55,8 +55,10 @@ addButton.addEventListener("click", function () {
   if (checkedBillitem) {
     // Add the appropriate value to the call / sms total
     if (checkedBillitem.value === "call") {
+      overallTotal += callCost;
       callTotalcost += callCost;
     } else if (checkedBillitem.value === "sms") {
+      overallTotal += smsCost;
       smsTotalcost += smsCost;
     }
 

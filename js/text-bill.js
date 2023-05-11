@@ -14,9 +14,9 @@ addToBillBtn.addEventListener("click", function() {
   const billTypeEntered = billTypeText.value.trim();
   let cost = 0;
 
-  if (billTypeEntered === "call") {
+  if (billTypeEntered.toLowerCase() === "call") {
     cost = 2.75;
-  } else if (billTypeEntered === "sms") {
+  } else if (billTypeEntered.toLowerCase() === "sms") {
     cost = 0.75;
   }
 
@@ -29,9 +29,9 @@ addToBillBtn.addEventListener("click", function() {
   const smsTotal = document.querySelector(".smsTotalOne");
   const total = document.querySelector(".totalOne");
 
-  if (billTypeEntered === "call") {
+  if (billTypeEntered.toLowerCase() === "call") {
     callTotal.textContent = (parseFloat(callTotal.textContent) + cost).toFixed(2);
-  } else if (billTypeEntered === "sms") {
+  } else if (billTypeEntered.toLowerCase() === "sms") {
     smsTotal.textContent = (parseFloat(smsTotal.textContent) + cost).toFixed(2);
   }
 

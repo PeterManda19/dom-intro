@@ -18,9 +18,9 @@ function calculateBill() {
   for (let i = 0; i < billItems.length; i++) {
     const billItem = billItems[i].trim(); // remove any whitespace around the item
     //  * check if it is a call or an sms and add the right amount to the overall total
-    if (billItem === "call") {
+    if (billItem.toLowerCase() === "call") {
       total += 2.75;
-    } else if (billItem === "sms") {
+    } else if (billItem.toLowerCase() === "sms") {
       total += 0.75;
     }
   }
