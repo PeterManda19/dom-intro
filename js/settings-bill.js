@@ -54,9 +54,9 @@ addButton.addEventListener("click", function () {
   var checkedBillitem = document.querySelector("input[name='billItemTypeWithSettings']:checked");
   if (checkedBillitem) {
     // Add the appropriate value to the call / sms total
-    if (checkedBillitem.value === "call") {
+    if (checkedBillitem.value.toLowerCase() === "call") {
       callTotalcost += callCost;
-    } else if (checkedBillitem.value === "sms") {
+    } else if (checkedBillitem.value.toLowerCase() === "sms") {
       smsTotalcost += smsCost;
     }
 
@@ -64,19 +64,24 @@ addButton.addEventListener("click", function () {
     overallTotal = callTotalcost + smsTotalcost;
 
     // Display the latest total on the screen
-    document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
-    document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
-    document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
+    const callTotalSettingsElement = document.querySelector(".callTotalSettings");
+    const smsTotalSettingsElement = document.querySelector(".smsTotalSettings");
+    const totalSettingsElement = document.querySelector(".totalSettings");
+    
+    callTotalSettingsElement.innerHTML = callTotalcost.toFixed(2);
+    smsTotalSettingsElement.innerHTML = smsTotalcost.toFixed(2);
+    totalSettingsElement.innerHTML = overallTotal.toFixed(2);
+
+    totalSettingsElement.textContent = overallTotal.toFixed(2);
 
     // Check the value thresholds and display the total value in the right color
-    if (overallTotal >= criticalLevel) {
-      document.querySelector(".totalSettings").classList.add("danger");
+    if (overallTotal > criticalLevel) {
+      totalSettingsElement.style.color = "red";
       addButton.disabled = true; // Prevent any new costs from being added
-    } else if (overallTotal >= warningLevel) {
-      document.querySelector(".totalSettings").classList.add("warning");
+    } else if (overallTotal > warningLevel) {
+      totalSettingsElement.style.color = "orange";
     } else {
-      document.querySelector(".totalSettings").classList.remove("warning");
-      document.querySelector(".totalSettings").classList.remove("danger");
+      totalSettingsElement.style.color = "black";
       addButton.disabled = false; // Re-enable the add button
     }
   }

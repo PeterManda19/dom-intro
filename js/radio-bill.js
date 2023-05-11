@@ -20,10 +20,10 @@ radioBillAddBtn.addEventListener("click", function() {
     // get the value of the checked radio button
     var billItemType = checkedRadioBtn.value;
     // add the appropriate value to the running total
-    if (billItemType === "call") {
+    if (billItemType.toLowerCase()  === "call") {
       totalCost += 2.75;
       callTotal += 2.75;
-    } else if (billItemType === "sms") {
+    } else if (billItemType.toLowerCase()  === "sms") {
       totalCost += 0.75;
       smsTotal += 0.75;
     }
