@@ -5,46 +5,48 @@ const billItemTypeRadios = document.querySelectorAll(".billItemTypeRadio");
 const radioBillAddBtn = document.querySelector(".radioBillAddBtn");
 
 // create a variable that will keep track of the total bill
-let totalBill = 0;
+let totalCost = 0;
+let callTotal = 0;
+let smsTotal = 0;
 
 // add an event listener for when the add button is pressed
 radioBillAddBtn.addEventListener("click", function() {
 
-  // in the event listener get the value from the billItemTypeRadio radio buttons
-  let billItemType = "";
-  for (const billItemTypeRadio of billItemTypeRadios) {
-    if (billItemTypeRadio.checked) {
-      billItemType = billItemTypeRadio.value;
+  // get the checked radio button for the bill item type
+  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+
+  // check if a radio button is checked before getting its value
+  if (checkedRadioBtn) {
+    // get the value of the checked radio button
+    var billItemType = checkedRadioBtn.value;
+    // add the appropriate value to the running total
+    if (billItemType === "call") {
+      totalCost += 2.75;
+      callTotal += 2.75;
+    } else if (billItemType === "sms") {
+      totalCost += 0.75;
+      smsTotal += 0.75;
     }
   }
 
-  // * add the appropriate value to the running total
-  if (billItemType === "call") {
-    totalBill += 2.75;
-  } else if (billItemType === "sms") {
-    totalBill += 0.75;
-  }
-
-  // * add nothing for invalid values that is not 'call' or 'sms'.
-
   // display the latest total on the screen
-  const callTotal = document.querySelector(".callTotalTwo");
-  const smsTotal = document.querySelector(".smsTotalTwo");
-  const total = document.querySelector(".totalTwo");
+  const callTotalElement = document.querySelector(".callTotalTwo");
+  const smsTotalElement = document.querySelector(".smsTotalTwo");
+  const totalElement = document.querySelector(".totalTwo");
 
-  callTotal.innerHTML = (totalBill - smsTotal).toFixed(2);
-  smsTotal.innerHTML = (totalBill - callTotal).toFixed(2);
-  total.innerHTML = totalBill.toFixed(2);
+  callTotalElement.innerHTML = callTotal.toFixed(2);
+  smsTotalElement.innerHTML = smsTotal.toFixed(2);
+  totalElement.innerHTML = totalCost.toFixed(2);
 
-  if (totalBill > 30 && totalBill <= 50) {
-    total.style.remove("red");
-    total.style.add("orange");
-  } else if (totalBill > 50) {
-    total.style.remove("orange");
-    total.style.add("red");
+  if (totalCost > 30 && totalCost <= 50) {
+    totalElement.style.remove("red");
+    totalElement.style.add("orange");
+  } else if (totalCost > 50) {
+    totalElement.style.remove("orange");
+    totalElement.style.add("red");
   } else {
-    total.style.remove("orange");
-    total.style.remove("red");
-    total.style.add("black");
+    totalElement.style.remove("orange");
+    totalElement.style.remove("red");
+    totalElement.style.add("black");
   }
 });
