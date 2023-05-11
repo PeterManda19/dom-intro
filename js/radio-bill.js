@@ -38,15 +38,13 @@ radioBillAddBtn.addEventListener("click", function() {
   smsTotalElement.innerHTML = smsTotal.toFixed(2);
   totalElement.innerHTML = totalCost.toFixed(2);
 
-  if (totalCost > 30 && totalCost <= 50) {
-    totalElement.style.remove("red");
-    totalElement.style.add("orange");
-  } else if (totalCost > 50) {
-    totalElement.style.remove("orange");
-    totalElement.style.add("red");
+  totalElement.textContent = totalCost.toFixed(2);
+
+  if (totalCost > 50) {
+    totalElement.style.color = "red";
+  } else if (totalCost > 30) {
+    totalElement.style.color = "orange";
   } else {
-    totalElement.style.remove("orange");
-    totalElement.style.remove("red");
-    totalElement.style.add("black");
+    totalElement.style.color = "black";
   }
 });

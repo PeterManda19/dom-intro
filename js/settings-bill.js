@@ -21,8 +21,8 @@ let warningLevel = 0;
 let criticalLevel = 0;
 
 // Create variables that will keep track of all three totals
-let callTotal = 0;
-let smsTotal = 0;
+let callTotalcost = 0;
+let smsTotalcost = 0;
 let overallTotal = 0;
 
 // Add an event listener for when the 'Update settings' button is pressed
@@ -34,13 +34,13 @@ updateSettingsBtn.addEventListener("click", function () {
   criticalLevel = parseFloat(criticalLevelInput.value);
 
   // Reset the totals to zero
-  callTotal = 0;
-  smsTotal = 0;
+  callTotalcost = 0;
+  smsTotalcost = 0;
   overallTotal = 0;
 
   // Reset the displayed values on the screen
-  document.querySelector(".callTotalSettings").textContent = callTotal.toFixed(2);
-  document.querySelector(".smsTotalSettings").textContent = smsTotal.toFixed(2);
+  document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
+  document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
   document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
 
   // Reset the color of the total value displayed on the screen
@@ -51,21 +51,21 @@ updateSettingsBtn.addEventListener("click", function () {
 // Add an event listener for when the add button is pressed
 addButton.addEventListener("click", function () {
   // Get the value from the billItemTypeRadio radio buttons
-  const billItemType = document.querySelector(".billItemTypeWithSettings:checked");
-  if (billItemType) {
+  var checkedBillitem = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+  if (checkedBillitem) {
     // Add the appropriate value to the call / sms total
-    if (billItemType.value === "call") {
-      callTotal += callCost;
-    } else if (billItemType.value === "sms") {
-      smsTotal += smsCost;
+    if (checkedBillitem.value === "call") {
+      callTotalcost += callCost;
+    } else if (checkedBillitem.value === "sms") {
+      smsTotalcost += smsCost;
     }
 
     // Add the appropriate value to the overall total
-    overallTotal = callTotal + smsTotal;
+    overallTotal = callTotalcost + smsTotalcost;
 
     // Display the latest total on the screen
-    document.querySelector(".callTotalSettings").textContent = callTotal.toFixed(2);
-    document.querySelector(".smsTotalSettings").textContent = smsTotal.toFixed(2);
+    document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
+    document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
     document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
 
     // Check the value thresholds and display the total value in the right color
