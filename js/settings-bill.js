@@ -9,7 +9,7 @@ const warningLevelInput = document.querySelector(".warningLevelSetting");
 const criticalLevelInput = document.querySelector(".criticalLevelSetting");
 
 // Get a reference to the add button
-const addButton = document.querySelector(".button-primary");
+const addButton = document.querySelector(".addButton");
 
 // Get a reference to the 'Update settings' button
 const updateSettingsBtn = document.querySelector(".updateSettings");
@@ -24,14 +24,16 @@ let criticalLevel = 0;
 let callTotalcost = 0;
 let smsTotalcost = 0;
 let overallTotal = 0;
+let num = 0;
 
 // Add an event listener for when the 'Update settings' button is pressed
 updateSettingsBtn.addEventListener("click", function () {
+  
   // Update the values of the settings variables
-  callCost = parseFloat(callCostInput.value);
-  smsCost = parseFloat(smsCostInput.value);
-  warningLevel = parseFloat(warningLevelInput.value);
-  criticalLevel = parseFloat(criticalLevelInput.value);
+  callCost = parseFloat(callCostInput.value) || num.toFixed(2);// use zero if input is not a number
+  smsCost = parseFloat(smsCostInput.value) || num.toFixed(2);// use zero if input is not a number
+  warningLevel = parseFloat(warningLevelInput.value) || num.toFixed(2);// use zero if input is not a number
+  criticalLevel = parseFloat(criticalLevelInput.value) || num.toFixed(2);// use zero if input is not a number
 
   // Reset the totals to zero
   callTotalcost = 0;
@@ -44,8 +46,8 @@ updateSettingsBtn.addEventListener("click", function () {
   document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
 
   // Reset the color of the total value displayed on the screen
-  document.querySelector(".totalSettings").classList.remove("warning");
-  document.querySelector(".totalSettings").classList.remove("danger");
+  document.querySelector(".totalSettings").style.setProperty("orange", "");
+  document.querySelector(".totalSettings").style.setProperty("red", "");
 });
 
 // Add an event listener for when the add button is pressed
@@ -72,7 +74,7 @@ addButton.addEventListener("click", function () {
     smsTotalSettingsElement.innerHTML = smsTotalcost.toFixed(2);
     totalSettingsElement.innerHTML = overallTotal.toFixed(2);
 
-    totalSettingsElement.textContent = overallTotal.toFixed(2);
+    totalSettingsElement.textContent = Number(overallTotal.toFixed(2));
 
     // Check the value thresholds and display the total value in the right color
     if (overallTotal > criticalLevel) {
