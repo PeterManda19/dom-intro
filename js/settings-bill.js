@@ -26,29 +26,91 @@ let smsTotalcost = 0;
 let overallTotal = 0;
 let num = 0;
 
+// // Add an event listener for when the 'Update settings' button is pressed
+// updateSettingsBtn.addEventListener("click", function () {
+  
+//   // Update the values of the settings variables
+//   callCost = parseFloat(callCostInput.value) || num.toFixed(2);// use zero if input is not a number
+//   smsCost = parseFloat(smsCostInput.value) || num.toFixed(2);// use zero if input is not a number
+//   warningLevel = parseFloat(warningLevelInput.value) || num.toFixed(2);// use zero if input is not a number
+//   criticalLevel = parseFloat(criticalLevelInput.value) || num.toFixed(2);// use zero if input is not a number
+
+//   // Reset the totals to zero
+//   callTotalcost = 0;
+//   smsTotalcost = 0;
+//   overallTotal = 0;
+
+//   // Reset the displayed values on the screen
+//   document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
+//   document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
+//   document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
+
+//   // Reset the color of the total value displayed on the screen
+//   document.querySelector(".totalSettings").style.setProperty("orange", "black");
+//   document.querySelector(".totalSettings").style.setProperty("red", "black");
+  
+// });
+
 // Add an event listener for when the 'Update settings' button is pressed
 updateSettingsBtn.addEventListener("click", function () {
   
   // Update the values of the settings variables
-  callCost = parseFloat(callCostInput.value) || num.toFixed(2);// use zero if input is not a number
-  smsCost = parseFloat(smsCostInput.value) || num.toFixed(2);// use zero if input is not a number
-  warningLevel = parseFloat(warningLevelInput.value) || num.toFixed(2);// use zero if input is not a number
-  criticalLevel = parseFloat(criticalLevelInput.value) || num.toFixed(2);// use zero if input is not a number
+  const newCallCost = parseFloat(callCostInput.value) || num.toFixed(2);// use zero if input is not a number
+  const newSmsCost = parseFloat(smsCostInput.value) || num.toFixed(2);// use zero if input is not a number
+  const newWarningLevel = parseFloat(warningLevelInput.value) || num.toFixed(2);// use zero if input is not a number
+  const newCriticalLevel = parseFloat(criticalLevelInput.value) || num.toFixed(2);// use zero if input is not a number
 
-  // Reset the totals to zero
-  callTotalcost = 0;
-  smsTotalcost = 0;
-  overallTotal = 0;
+  if (newCriticalLevel > criticalLevel && newCriticalLevel > warningLevel) {
+    // update critical level and adjust color if necessary
+    criticalLevel = newCriticalLevel;
 
-  // Reset the displayed values on the screen
-  document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
-  document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
-  document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
+    const totalSettingsElement = document.querySelector(".totalSettings");
 
-  // Reset the color of the total value displayed on the screen
-  document.querySelector(".totalSettings").style.setProperty("orange", "");
-  document.querySelector(".totalSettings").style.setProperty("red", "");
+    if (overallTotal > warningLevel && overallTotal < criticalLevel) {
+      totalSettingsElement.style.color = "orange";
+    } else if (overallTotal > criticalLevel) {
+      totalSettingsElement.style.color = "red";
+      addButton.disabled = true;
+    }
+  } else if (newWarningLevel > warningLevel && newWarningLevel < criticalLevel) {
+    // update warning level and adjust color if necessary
+    warningLevel = newWarningLevel;
+
+    const totalSettingsElement = document.querySelector(".totalSettings");
+
+    if (overallTotal > criticalLevel) {
+      totalSettingsElement.style.color = "red";
+      addButton.disabled = true;
+    } else {
+      totalSettingsElement.style.color = "black";
+      addButton.disabled = false;
+    }
+  } else {
+    // update all settings
+    callCost = newCallCost;
+    smsCost = newSmsCost;
+    warningLevel = newWarningLevel;
+    criticalLevel = newCriticalLevel;
+
+    // Reset the totals to zero
+    callTotalcost = 0;
+    smsTotalcost = 0;
+    overallTotal = 0;
+
+    // Reset the displayed values on the screen
+    document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
+    document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
+    document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
+
+    // Reset the color of the total value displayed on the screen
+    document.querySelector(".totalSettings").style.setProperty("orange", "black");
+    document.querySelector(".totalSettings").style.setProperty("red", "black");
+
+    // Re-enable the add button
+    addButton.disabled = false;
+  }
 });
+
 
 // Add an event listener for when the add button is pressed
 addButton.addEventListener("click", function () {
@@ -80,7 +142,7 @@ addButton.addEventListener("click", function () {
     if (overallTotal > criticalLevel) {
       totalSettingsElement.style.color = "red";
       addButton.disabled = true; // Prevent any new costs from being added
-    } else if (overallTotal > warningLevel) {
+    } else if (overallTotal > warningLevel  && overallTotal < criticalLevel) {
       totalSettingsElement.style.color = "orange";
     } else {
       totalSettingsElement.style.color = "black";
@@ -88,3 +150,17 @@ addButton.addEventListener("click", function () {
     }
   }
 });
+
+// Do add the following conditions:
+
+// if i reset the critical level to be greater than the previous critical level
+// but greater than the current displaying warning level
+// then color of the total must adjust to the color of warning level
+// and the current displaying smsTotalcost and callTotalcost must not be reset to zero
+// but the newly set sms and call cost added on the previous sms and call cost.
+
+// if I reset the warning level to be greater than the previuos warning level 
+// but less than the current displaying critical level
+// then color of the total must adjust to the color black
+// and the current displaying smsTotalcost and callTotalcost must not be reset to zero
+// but the newly set sms and call cost added on the previous sms and call cost.
