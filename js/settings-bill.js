@@ -26,31 +26,6 @@ let smsTotalcost = 0;
 let overallTotal = 0;
 let num = 0;
 
-// // Add an event listener for when the 'Update settings' button is pressed
-// updateSettingsBtn.addEventListener("click", function () {
-  
-//   // Update the values of the settings variables
-//   callCost = parseFloat(callCostInput.value) || num.toFixed(2);// use zero if input is not a number
-//   smsCost = parseFloat(smsCostInput.value) || num.toFixed(2);// use zero if input is not a number
-//   warningLevel = parseFloat(warningLevelInput.value) || num.toFixed(2);// use zero if input is not a number
-//   criticalLevel = parseFloat(criticalLevelInput.value) || num.toFixed(2);// use zero if input is not a number
-
-//   // Reset the totals to zero
-//   callTotalcost = 0;
-//   smsTotalcost = 0;
-//   overallTotal = 0;
-
-//   // Reset the displayed values on the screen
-//   document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
-//   document.querySelector(".smsTotalSettings").textContent = smsTotalcost.toFixed(2);
-//   document.querySelector(".totalSettings").textContent = overallTotal.toFixed(2);
-
-//   // Reset the color of the total value displayed on the screen
-//   document.querySelector(".totalSettings").style.setProperty("orange", "black");
-//   document.querySelector(".totalSettings").style.setProperty("red", "black");
-  
-// });
-
 // Add an event listener for when the 'Update settings' button is pressed
 updateSettingsBtn.addEventListener("click", function () {
   
