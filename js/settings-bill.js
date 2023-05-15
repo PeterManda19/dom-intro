@@ -15,16 +15,17 @@ const addButton = document.querySelector(".addButton");
 const updateSettingsBtn = document.querySelector(".updateSettings");
 
 // Create variables that will keep track of all the settings
-let callCost = 0;
-let smsCost = 0;
-let warningLevel = 0;
-let criticalLevel = 0;
+let num = 0;
+let callCost = num;
+let smsCost = num;
+let warningLevel = num;
+let criticalLevel = num;
 
 // Create variables that will keep track of all three totals
-let callTotalcost = 0;
-let smsTotalcost = 0;
-let overallTotal = 0;
-let num = 0;
+let callTotalcost = num;
+let smsTotalcost = num;
+let overallTotal = num;
+
 
 // Add an event listener for when the 'Update settings' button is pressed
 updateSettingsBtn.addEventListener("click", function () {
@@ -68,9 +69,9 @@ updateSettingsBtn.addEventListener("click", function () {
     criticalLevel = newCriticalLevel;
 
     // Reset the totals to zero
-    callTotalcost = 0;
-    smsTotalcost = 0;
-    overallTotal = 0;
+    callTotalcost = num;
+    smsTotalcost = num;
+    overallTotal = num;
 
     // Reset the displayed values on the screen
     document.querySelector(".callTotalSettings").textContent = callTotalcost.toFixed(2);
@@ -119,23 +120,9 @@ addButton.addEventListener("click", function () {
       addButton.disabled = true; // Prevent any new costs from being added
     } else if (overallTotal > warningLevel  && overallTotal < criticalLevel) {
       totalSettingsElement.style.color = "orange";
-    } else {
+    } else if(overallTotal < warningLevel) {
       totalSettingsElement.style.color = "black";
       addButton.disabled = false; // Re-enable the add button
     }
   }
 });
-
-// Do add the following conditions:
-
-// if i reset the critical level to be greater than the previous critical level
-// but greater than the current displaying warning level
-// then color of the total must adjust to the color of warning level
-// and the current displaying smsTotalcost and callTotalcost must not be reset to zero
-// but the newly set sms and call cost added on the previous sms and call cost.
-
-// if I reset the warning level to be greater than the previuos warning level 
-// but less than the current displaying critical level
-// then color of the total must adjust to the color black
-// and the current displaying smsTotalcost and callTotalcost must not be reset to zero
-// but the newly set sms and call cost added on the previous sms and call cost.
