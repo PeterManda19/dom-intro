@@ -34,7 +34,7 @@ let overallTotal = 0;
  * Checks the value thresholds and displays the total value in the right color.
  */
 function checkThresholdsAndDisplayTotalColor(){
-  if (overallTotal > criticalLevel) {
+  if (overallTotal >= criticalLevel) {
     totalSettingsElement.classList.remove("warning");
     totalSettingsElement.classList.add("danger");
   } else if (overallTotal >= warningLevel  && overallTotal < criticalLevel) {
