@@ -20,3 +20,171 @@
   font-weight: bold;
   font-size: 2em;
 }
+
+/* Styles for my landing page "index.html" */
+.header {
+  background-color: #FFB703;
+  padding: 1em;
+}
+
+.main {
+  background-color: #FB8500;
+}
+
+.footer {
+  background-color: #219EBC;
+  padding: 1em;   	
+}
+
+/*Keep the footer at the bottom*/
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+/*Making the page responsive*/
+@media(min-width: 800px){
+  /*Use flexbox to put the menu items next to each other when the screen is wide*/
+  .menu {
+      display: flex;
+  }
+
+  /*Position the side-bar & content*/
+  .side-bar {
+      float: left;
+      width: 50%;
+      padding: 1em;
+  }
+} 
+
+.content {
+  width: 50%;
+  padding: 1em;
+}
+
+/* Styling the menu.*/
+.menu li {
+  list-style: none;
+  margin: 1em;
+  padding: 0em;
+}
+
+.menu a {
+  /* Ensure one can click anyware in the li for the link */
+  padding: 1em;
+  display: block;
+  width: 6em;
+}
+
+.menu a:hover {
+  /* Change the menu color to darker green when hovering over a link*/
+  background-color : white;
+}
+
+/*Add some space around the edges*/
+.side-bar {
+  padding: 1em;
+}
+
+/* ############################################################################################# */
+
+/* Styles for my first webpage "my-webpage.html" */
+.header1 {
+  background-image: url('images/TableMountain.jpg');
+  background-size: cover; 
+  height: 500px;
+  background-position: center center; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+} 
+
+
+.body{
+  background-color: #023047;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.which-city{
+  background-color: #FFB703;
+}
+
+.foreign-lang{
+  background-color: #FB8500;
+}
+
+.historic-places{
+  background-color: #FFB703;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.historic-places .display {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.historic-places .display > div {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.footer{
+  background-color: #219EBC;
+}
+
+.box {
+  /* box-model */
+  border: 1px;
+  padding: 1em;
+  margin: 1em;
+  margin-bottom: 0.5em;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: whitesmoke;
+}
+
+@media screen and (min-width: 768px) {
+  .hero-title {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      color: black;
+  }
+
+  .hero-name {
+      margin-right: 20px;
+  }
+
+  .display{
+      display: flex;
+  }
+  
+  .width{
+      max-width: 50%;
+  }
+
+  .historic-places .display > div {
+      width: calc(33.33% - 1rem);
+      margin: 0 0.5rem 1rem;
+  }
+}   
+
+.float-img-right{
+  float: right;
+}
+
+.float-img-left{
+  float: left;
+}
+
+.width-span{
+  max-width: 100%;
+}
