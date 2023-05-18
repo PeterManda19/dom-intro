@@ -1,4 +1,4 @@
-const { describe } = require("mocha");
+// const { describe } = require("mocha");
 
 describe("The bill with settings factory function", () => {
     
@@ -83,11 +83,75 @@ describe("use values",() => {
     it("should be able use the call cost set", () => {
 
         let settingsBill = BillWithSettings();
-        settingsBill.setWarningLevel(30);
-        settingsBill.setCriticalLevel(50);
 
-        assert.equal(30, settingsBill.getWarningLevel());
-        assert.equal(50, settingsBill.getCriticalLevel());
+        settingsBill.setCallCost(2.25);
+        settingsBill.setSmsCost(0.85);
+
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+
+        assert.equal(6.75, settingsBill.getTotalCost());
+        assert.equal(6.75, settingsBill.getTotalCallCost());
+        assert.equal(0.00, settingsBill.getTotalSmsCost());
+    
+
+        
     });
+
+    it("should be able use the call cost set for 2 calls at 1.35 each", () => {
+
+        let settingsBill = BillWithSettings();
+
+        settingsBill.setCallCost(1.35);
+        settingsBill.setSmsCost(0.85);
+
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+
+        assert.equal(2.70, settingsBill.getTotalCost());
+        assert.equal(2.70, settingsBill.getTotalCallCost());
+        assert.equal(0.00, settingsBill.getTotalSmsCost()); 
+    });
+
+    it("should be able use the sms cost set for 2 sms at 0.85 each", () => {
+
+        let settingsBill = BillWithSettings();
+
+        settingsBill.setCallCost(1.35);
+        settingsBill.setSmsCost(0.85);
+
+        settingsBill.sendSms();
+        settingsBill.sendSms();
+
+        assert.equal(1.70, settingsBill.getTotalCost());
+        assert.equal(0.00, settingsBill.getTotalCallCost());
+        assert.equal(1.70, settingsBill.getTotalSmsCost()); 
+    });
+
+    it("should be able use the sms cost set for 2 sms at 0.85 each and make 1 call at 1.35", () => {
+
+        let settingsBill = BillWithSettings();
+
+        settingsBill.setCallCost(1.35);
+        settingsBill.setSmsCost(0.85);
+
+        settingsBill.sendSms();
+        settingsBill.sendSms();
+        settingsBill.makeCall();
+
+        assert.equal(3.05, settingsBill.getTotalCost());
+        assert.equal(1.35, settingsBill.getTotalCallCost());
+        assert.equal(1.70, settingsBill.getTotalSmsCost()); 
+    });
+
+});
+
+describe("warning & crical level", () =>{
+    it("it should return a class name of 'warning' if warning level is reached", () => {
+        let settingsBill = BillWithSettings();
+
+        assert.equal("warning",settingsBill.totalClassName());
+    })
 
 });
