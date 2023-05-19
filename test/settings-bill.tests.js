@@ -198,7 +198,7 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
 
         assert.equal("critical",settingsBill.totalClassName());
-        assert.equal(10.00, settingsBill.getTotalCost());
+        assert.equal(10.00, settingsBill.getTotalCallCost());
     });
 
 });
