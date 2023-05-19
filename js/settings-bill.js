@@ -1,7 +1,7 @@
-// import BillWithSettings from "../BillWithSettingsFactoryFunction";
+import BillWithSettings from "BillWithSettingsFactoryFunction";
 
-// // Create an instance of BillWithSettings
-// const billSettings = BillWithSettings();
+// Create an instance of BillWithSettings
+const billSettings = BillWithSettings();
 
 
 // Get a reference to the sms or call radio buttons
