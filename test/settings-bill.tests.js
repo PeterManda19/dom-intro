@@ -166,6 +166,7 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
 
         assert.equal("warning",settingsBill.totalClassName());
+        assert.equal(5.40, settingsBill.getTotalCallCost());
     });
 
     it("it should return a class name of 'critical' if critical level is reached", () => {
@@ -182,6 +183,7 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
 
         assert.equal("critical",settingsBill.totalClassName());
+        assert.equal(10.00, settingsBill.getTotalCallCost());
     });
 
     it("it should stop the Total Call cost from increasing when the critical level is reached", () => {
@@ -199,6 +201,31 @@ describe("warning & critical level", () =>{
 
         assert.equal("critical",settingsBill.totalClassName());
         assert.equal(10.00, settingsBill.getTotalCallCost());
+    });
+
+    it("it should allow the total to increase after reaching the critical level", () => {
+        let settingsBill = BillWithSettings();
+
+        settingsBill.setCallCost(2.50);
+        settingsBill.setSmsCost(0.85);
+        settingsBill.setCriticalLevel(10.00);
+
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+
+        assert.equal("critical",settingsBill.totalClassName());
+        assert.equal(10.00, settingsBill.getTotalCallCost());
+
+        settingsBill.setCriticalLevel(20.00);
+
+        assert.equal("warning",settingsBill.totalClassName());
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+        assert.equal(15.00, settingsBill.getTotalCallCost());
+
     });
 
 });
