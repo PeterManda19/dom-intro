@@ -203,7 +203,7 @@ describe("warning & critical level", () =>{
         assert.equal(10.00, settingsBill.getTotalCallCost());
     });
 
-    it("it should allow the total to increase after reaching the critical level", () => {
+    it("it should allow the total to increase after reaching the critical level and then upping the previous critical level", () => {
         let settingsBill = BillWithSettings();
 
         settingsBill.setCallCost(2.50);
