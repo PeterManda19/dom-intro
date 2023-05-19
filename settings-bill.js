@@ -59,6 +59,20 @@ function BillWithSettings() {
   function getTotalSmsCost() {
     return smsCostTotal;
   }
+
+  function hasReachedCriticalLevel(){
+    getTotalCost() >= getCriticalLevel();
+  }
+
+  function totalClassName(){
+    if (hasReachedCriticalLevel()){
+      return "critical";
+    } 
+    
+    if (getTotalCost() >= getWarningLevel()){
+      return "warning";
+    }
+  }
   
   return {
     setCallCost,
@@ -73,6 +87,7 @@ function BillWithSettings() {
     sendSms,
     getTotalCost,
     getTotalCallCost,
-    getTotalSmsCost
+    getTotalSmsCost,
+    totalClassName
   }
 }
