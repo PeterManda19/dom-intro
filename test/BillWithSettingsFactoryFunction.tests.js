@@ -1,5 +1,3 @@
-// const { describe } = require("mocha");
-
 describe("The bill with settings factory function", () => {
     
     it("should set the call cost", () => {

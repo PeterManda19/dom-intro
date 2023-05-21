@@ -39,11 +39,14 @@ addToBillBtn.addEventListener("click", function() {
 
   //check if the total cost exceed R30.00 show the total cost in orange, if over R50 show it in red
   if (totalBill > 50) {
-    total.style.color = "red";
+    total.classList.remove("warning");
+    total.classList.add("danger");
   } else if (totalBill > 30) {
-    total.style.color = "orange";
+    total.classList.remove("danger");
+    total.classList.add("warning");
   } else {
-    total.style.color = "black";
+    total.classList.remove("danger");
+    total.classList.remove("warning");
   }
 
 });

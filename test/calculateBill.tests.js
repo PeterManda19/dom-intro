@@ -1,8 +1,8 @@
-describe('calculateBill', () => {
+describe('The Calculate bill widget function', () => {
   // Test case 1
   it('should return the correct total bill for a given bill string', () => {
     // Input
-    const billString = 'call, sms';
+    const billString= 'call, sms';
 
     // Expected output
     const expectedTotalBill = 3.50;

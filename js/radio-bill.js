@@ -41,10 +41,13 @@ radioBillAddBtn.addEventListener("click", function() {
   totalElement.textContent = totalCost.toFixed(2);
 
   if (totalCost > 50) {
-    totalElement.style.color = "red";
+    totalElement.classList.remove("warning");
+    totalElement.classList.add("danger");
   } else if (totalCost > 30) {
-    totalElement.style.color = "orange";
+    totalElement.classList.remove("danger");
+    totalElement.classList.add("warning");
   } else {
-    totalElement.style.color = "black";
+    totalSettingsElement.classList.remove("danger");
+    totalSettingsElement.classList.remove("warning");
   }
 });

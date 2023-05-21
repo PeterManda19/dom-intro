@@ -1,5 +1,5 @@
 // Create an instance of BillWithSettings
-const billSettings = BillWithSettings();
+const billSettings = new BillWithSettings();
 
 // Get a reference to the sms or call radio buttons
 const callRadioBtn = document.querySelector(".billItemTypeWithSettings[value='call']");
@@ -58,8 +58,10 @@ function updateCallSmsTotal(checkedBillitem) {
     // Add the appropriate value to the call / sms total
     if (checkedBillitem.value.toLowerCase() === "call") {
       callTotalcost += callCost;
+      billSettings.makeCall();
     } else if (checkedBillitem.value.toLowerCase() === "sms") {
       smsTotalcost += smsCost;
+      billSettings.sendSms();
     }
   }
 }
