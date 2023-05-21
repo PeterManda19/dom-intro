@@ -69,12 +69,18 @@ function BillWithSettings() {
     return getTotalCost() >= getCriticalLevel();
   }
 
-  function totalClassName(){
+  function hasReachedWarningLevel(){
+    return getTotalCost() >= getWarningLevel() & getTotalCost() < getCriticalLevel();
+  }
+
+  function criticalTotalClassName(){
     if (hasReachedCriticalLevel()){
       return "danger";
     } 
-    
-    if (getTotalCost() >= getWarningLevel()){
+  }
+
+  function warningTotalClassName(){
+    if (hasReachedWarningLevel()){
       return "warning";
     }
   }
@@ -93,6 +99,7 @@ function BillWithSettings() {
     getTotalCost,
     getTotalCallCost,
     getTotalSmsCost,
-    totalClassName
+    criticalTotalClassName,
+    warningTotalClassName
   }
 }

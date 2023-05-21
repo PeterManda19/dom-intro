@@ -165,7 +165,7 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
         settingsBill.makeCall();
 
-        assert.equal("warning",settingsBill.totalClassName());
+        assert.equal("warning",settingsBill.warningTotalClassName());
         assert.equal(5.40, settingsBill.getTotalCallCost());
     });
 
@@ -182,7 +182,7 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
         settingsBill.makeCall();
 
-        assert.equal("danger",settingsBill.totalClassName());
+        assert.equal("danger",settingsBill.criticalTotalClassName());
         assert.equal(10.00, settingsBill.getTotalCallCost());
     });
 
@@ -199,7 +199,7 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
         settingsBill.makeCall();
 
-        assert.equal("danger",settingsBill.totalClassName());
+        assert.equal("danger",settingsBill.criticalTotalClassName());
         assert.equal(10.00, settingsBill.getTotalCallCost());
     });
 
@@ -216,12 +216,12 @@ describe("warning & critical level", () =>{
         settingsBill.makeCall();
         settingsBill.makeCall();
 
-        assert.equal("danger",settingsBill.totalClassName());
+        assert.equal("danger",settingsBill.criticalTotalClassName());
         assert.equal(10.00, settingsBill.getTotalCallCost());
 
         settingsBill.setCriticalLevel(20.00);
 
-        assert.equal("warning",settingsBill.totalClassName());
+        assert.equal("warning",settingsBill.warningTotalClassName());
         settingsBill.makeCall();
         settingsBill.makeCall();
         assert.equal(15.00, settingsBill.getTotalCallCost());
