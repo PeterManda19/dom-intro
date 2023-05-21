@@ -1,8 +1,5 @@
-import BillWithSettings from "BillWithSettingsFactoryFunction";
-
 // Create an instance of BillWithSettings
 const billSettings = BillWithSettings();
-
 
 // Get a reference to the sms or call radio buttons
 const callRadioBtn = document.querySelector(".billItemTypeWithSettings[value='call']");
@@ -26,15 +23,15 @@ const smsTotalSettingsElement = document.querySelector(".smsTotalSettings");
 const totalSettingsElement = document.querySelector(".totalSettings");
 
 // Create variables that will keep track of all the settings
-let callCost = 0;
-let smsCost = 0;
-let warningLevel = 0;
-let criticalLevel = 0;
+let callCost = billSettings.setCallCost(0);
+let smsCost = billSettings.setSmsCost(0);
+let warningLevel = billSettings.setWarningLevel(0);
+let criticalLevel = billSettings.setCriticalLevel(0);
 
 // Create variables that will keep track of all three totals
-let callTotalcost = 0;
-let smsTotalcost = 0;
-let overallTotal = 0;
+let callTotalcost = billSettings.getTotalCallCost();
+let smsTotalcost = billSettings.getTotalSmsCost();
+let overallTotal = billSettings.getTotalCost();
 
 /**
  * Checks the value thresholds and displays the total value in the right color.

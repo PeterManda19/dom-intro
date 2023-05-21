@@ -1,3 +1,6 @@
+// Create an instance of BillWithSettings
+const billSettings = BillWithSettings();
+
 // get a reference to the calculate button
 const calculateBtn = document.querySelector(".calculateBtn");
 
