@@ -1,7 +1,7 @@
-// Test cases for the calculateBill logic
-describe('The Text input bill widget function', function() {
+// Test cases for the Text input widget logic
+describe('The Text input bill widget function', () => {
 
-  it('should add the cost for a call to the total bill', function() {
+  it('should add the cost for a call to the total bill', () => {
     // Set up the test
     var totalBill = 0;
     var billTypeTextValue = 'call';
@@ -17,7 +17,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(totalBill, expectedTotal);
   });
 
-  it('should add the cost for an SMS to the total bill', function() {
+  it('should add the cost for an SMS to the total bill', () => {
     // Set up the test
     var totalBill = 0;
     var billTypeTextValue = 'sms';
@@ -33,7 +33,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(totalBill, expectedTotal);
   });
 
-  it('should not add any cost for an invalid bill type', function() {
+  it('should not add any cost for an invalid bill type', () => {
     // Set up the test
     var totalBill = 0;
     var billTypeTextValue = 'invalid';
@@ -53,7 +53,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(totalBill, expectedTotal);
   });
 
-  it('should update the call total and total bill for a call', function() {
+  it('should update the call total and total bill for a call', () => {
     // Set up the test
     var totalBill = 0;
     // simulating user clicking the add button 3 times 
@@ -79,7 +79,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(parseFloat(totalTextContent), expectedTotal);
   });
 
-  it('should update the SMS total and total bill for an SMS', function() {
+  it('should update the SMS total and total bill for an SMS', () => {
     // Set up the test
     var totalBill = 0;
     // simulating user clicking the add button 3 times 
@@ -105,7 +105,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(parseFloat(totalTextContent), expectedTotal);
   });
 
-  it('should update the total bill color to "danger" when the total exceeds R50.00', function() {
+  it('should update the total bill color to "danger" when the total exceeds R50.00', () => {
     // Set up the test
     // var billTypeTextValue = 'call';
     var totalBill = 58.00;
@@ -129,7 +129,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(totalClassListContainsDanger, true);
   });
 
-  it('should update the total bill color to "warning" when the total exceeds R30.00 but not R50.00', function() {
+  it('should update the total bill color to "warning" when the total exceeds R30.00 but not R50.00', () => {
     // Set up the test
     // var billTypeTextValue = 'call';
     var totalBill = 48.00;
@@ -153,7 +153,7 @@ describe('The Text input bill widget function', function() {
     assert.strictEqual(totalClassListContainsWarning, true);
   });
 
-  it('should remove the "danger" and "warning" classes from the total bill color when the total is within limits', function() {
+  it('should remove the "danger" and "warning" classes from the total bill color when the total is within limits', () => {
     // Set up the test
     // var billTypeTextValue = 'call';
     var totalBill = 15.00;
