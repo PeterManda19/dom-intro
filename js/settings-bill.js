@@ -28,22 +28,18 @@ let smsCost = billSettings.setSmsCost(smsCostInput);
 let warningLevel = billSettings.setWarningLevel(warningLevelInput);
 let criticalLevel = billSettings.setCriticalLevel(criticalLevelInput);
 
-// Create variables that will keep track of all three totals
-let callTotalcost = billSettings.getTotalCallCost();
-let smsTotalcost = billSettings.getTotalSmsCost();
-let overallTotal = billSettings.getTotalCost();
-
 /**
  * Checks the value thresholds and displays the total value in the right color.
  */
 function checkThresholdsAndDisplayTotalColor() {
-  if (overallTotal >= criticalLevel) {
-    totalSettingsElement.classList.remove("warning");
-    totalSettingsElement.classList.add("danger");
-  } else if (overallTotal >= warningLevel && overallTotal < criticalLevel) {
+  
+  if (billSettings.hasReachedCriticalLevel()) {
+    totalSettingsElement.classList.remove(billSettings.warningTotalClassName());
+    totalSettingsElement.classList.add(billSettings.criticalTotalClassName());
+  } else if (billSettings.hasReachedWarningLevel()) {
     totalSettingsElement.classList.remove("danger");
-    totalSettingsElement.classList.add("warning");
-  } else if (overallTotal < warningLevel) {
+    totalSettingsElement.classList.add(billSettings.warningTotalClassName());
+  } else {
     totalSettingsElement.classList.remove("danger");
     totalSettingsElement.classList.remove("warning");
   }
@@ -54,14 +50,12 @@ function checkThresholdsAndDisplayTotalColor() {
  * @param {HTMLElement} checkedBillitem - The checked bill item radio button element.
  */
 function updateCallSmsTotal(checkedBillitem) {
-  if (overallTotal < criticalLevel) {
+  if (!billSettings.hasReachedCriticalLevel()) {
     // Add the appropriate value to the call / sms total
     if (checkedBillitem.value.toLowerCase() === "call") {
-      callTotalcost += callCost;
       billSettings.makeCall();
     } else if (checkedBillitem.value.toLowerCase() === "sms") {
-      smsTotalcost += smsCost;
-      billSettings.sendSms();
+       billSettings.sendSms();
     }
   }
 }
@@ -75,6 +69,11 @@ function updateSettings() {
   smsCost = Number(smsCostInput.value) || 0; // use zero if input is not a number
   warningLevel = Number(warningLevelInput.value) || 0; // use zero if input is not a number
   criticalLevel = Number(criticalLevelInput.value) || 0; // use zero if input is not a number
+
+  billSettings.setCallCost(callCost);
+  billSettings.setSmsCost(smsCost);
+  billSettings.setWarningLevel(warningLevel);
+  billSettings.setCriticalLevel(criticalLevel);
 
   // Check the value thresholds and display the total value in the right color
   checkThresholdsAndDisplayTotalColor();
@@ -93,13 +92,14 @@ function handleAddButtonPress() {
     updateCallSmsTotal(checkedBillitem);
 
     // Add the appropriate value to the overall total
-    overallTotal = callTotalcost + smsTotalcost;
+    //overallTotal = callTotalcost + smsTotalcost;
+    billSettings.getTotalCost();
 
-    callTotalSettingsElement.innerHTML = callTotalcost.toFixed(2);
-    smsTotalSettingsElement.innerHTML = smsTotalcost.toFixed(2);
-    totalSettingsElement.innerHTML = overallTotal.toFixed(2);
+    callTotalSettingsElement.innerHTML = billSettings.getTotalCallCost().toFixed(2);
+    smsTotalSettingsElement.innerHTML = billSettings.getTotalSmsCost().toFixed(2);
+    totalSettingsElement.innerHTML = billSettings.getTotalCost().toFixed(2);
 
-    totalSettingsElement.textContent = overallTotal.toFixed(2);
+    totalSettingsElement.textContent = billSettings.getTotalCost().toFixed(2);
 
     // Check the value thresholds and display the total value in the right color
     checkThresholdsAndDisplayTotalColor();

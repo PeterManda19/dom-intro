@@ -99,6 +99,8 @@ function BillWithSettings() {
     getTotalCost,
     getTotalCallCost,
     getTotalSmsCost,
+    hasReachedCriticalLevel,
+    hasReachedWarningLevel,
     criticalTotalClassName,
     warningTotalClassName
   }
