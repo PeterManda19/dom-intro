@@ -23,10 +23,10 @@ const smsTotalSettingsElement = document.querySelector(".smsTotalSettings");
 const totalSettingsElement = document.querySelector(".totalSettings");
 
 // Create variables that will keep track of all the settings
-let callCost = billSettings.setCallCost(0);
-let smsCost = billSettings.setSmsCost(0);
-let warningLevel = billSettings.setWarningLevel(0);
-let criticalLevel = billSettings.setCriticalLevel(0);
+let callCost = billSettings.setCallCost(callCostInput);
+let smsCost = billSettings.setSmsCost(smsCostInput);
+let warningLevel = billSettings.setWarningLevel(warningLevelInput);
+let criticalLevel = billSettings.setCriticalLevel(criticalLevelInput);
 
 // Create variables that will keep track of all three totals
 let callTotalcost = billSettings.getTotalCallCost();
