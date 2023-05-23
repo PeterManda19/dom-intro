@@ -32,16 +32,16 @@ let criticalLevel = billSettings.setCriticalLevel(criticalLevelInput);
  * Checks the value thresholds and displays the total value in the right color.
  */
 function checkThresholdsAndDisplayTotalColor() {
-  
+
   if (billSettings.hasReachedCriticalLevel()) {
-    totalSettingsElement.classList.remove(billSettings.warningTotalClassName());
+    totalSettingsElement.classList.remove(billSettings.removeWarning());
     totalSettingsElement.classList.add(billSettings.criticalTotalClassName());
   } else if (billSettings.hasReachedWarningLevel()) {
-    totalSettingsElement.classList.remove("danger");
+    totalSettingsElement.classList.remove(billSettings.removeDanger());
     totalSettingsElement.classList.add(billSettings.warningTotalClassName());
   } else {
-    totalSettingsElement.classList.remove("danger");
-    totalSettingsElement.classList.remove("warning");
+    totalSettingsElement.classList.remove(billSettings.removeDanger());
+    totalSettingsElement.classList.remove(billSettings.removeWarning());
   }
 }
 

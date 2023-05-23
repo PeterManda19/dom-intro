@@ -10,6 +10,8 @@ function BillWithSettings() {
 
   function setCallCost(callCost) {
     theCallCost = callCost;
+  
+    
   }
 
   function getCallCost() {
@@ -84,6 +86,18 @@ function BillWithSettings() {
       return "warning";
     }
   }
+
+  function removeWarning() {
+    if (getTotalCost() < getWarningLevel()){
+      return "warning";
+    }
+  }
+
+  function removeDanger() {
+    if (getTotalCost() < getCriticalLevel()){
+      return "danger";
+    }
+  }
   
   return {
     setCallCost,
@@ -102,6 +116,8 @@ function BillWithSettings() {
     hasReachedCriticalLevel,
     hasReachedWarningLevel,
     criticalTotalClassName,
-    warningTotalClassName
+    warningTotalClassName,
+    removeWarning,
+    removeDanger
   }
 }
